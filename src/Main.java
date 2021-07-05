@@ -3,82 +3,50 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Main {
-
-    public static void main(String[] args) {
-
-        StringBuilder sb = new StringBuilder();
+    public static StringBuilder log = new StringBuilder();
+    public static void main(String[] args) throws IOException {
 
         File dir = new File("C://Workspace//13.1.1.1//Game");
-        if (dir.mkdir()) {
-            sb.append("Создан каталог Game        ");
-        }
+        log.append(dir + " успешно создан\n" + dir.mkdir());;
 
         File dir1 = new File(dir + "//src");
-        if (dir1.mkdir()) {
-            sb.append("Создан каталог src    ");
-        }
+        log.append(dir1 + " успешно создан\n" + dir1.mkdir());
 
         File dir2 = new File(dir + "//res");
-        if (dir2.mkdir()) {
-            sb.append("Создан каталог rec   ");
-        }
+        log.append(dir2 + " успешно создан\n" + dir2.mkdir());
 
         File dir3 = new File(dir + "//savegames");
-        if (dir3.mkdir()) {
-            sb.append("Создан каталог savegames   ");
-        }
+        log.append(dir3 + " успешно создан\n" + dir3.mkdir());
 
         File dir4 = new File(dir + "//temp");
-        if (dir4.mkdir()) {
-            sb.append("Создан каталог temp    ");
-        }
+        log.append(dir4 + " успешно создан\n" + dir4.mkdir());
 
         File dir5 = new File(dir1 + "//main");
-        if (dir5.mkdir()) {
-            sb.append("Создан каталог main    ");
-        }
+        log.append(dir5 + " успешно создан\n " + dir5.mkdir());
 
         File dir6 = new File(dir1 + "//test");
-        if (dir6.mkdir()) {
-            sb.append("Создан каталог test   ");
-        }
+        log.append(dir6 + " успешно создан\n" + dir6.mkdir());
 
         File dir7 = new File(dir2 + "//drawables");
-        if (dir7.mkdir()) {
-            sb.append("Создан каталог drawable    ");
-        }
+        log.append(dir7 + " успешно создан\n" + dir7.mkdir());
 
         File dir8 = new File(dir2 + "//vectors");
-        if (dir8.mkdir()) {
-            sb.append("Создан каталог vectors    ");
-        }
+        log.append(dir8 + " успешно создан\n" + dir8.mkdir());
+
         File dir9 = new File(dir2 + "//icons");
-        if (dir9.mkdir()) {
-            sb.append("Создан каталог icons    ");
-        }
+        log.append(dir9 + " успешно создан\n" + dir9.mkdir());
 
         File myFile2 = new File("C://Workspace//13.1.1.1//Game//src//main//Main.java");
-        try {
-            if (myFile2.createNewFile()) {
-                sb.append("Создан файл Main.java    ");
-
-            }
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
+        log.append(myFile2 + " успешно создан\n" + myFile2.createNewFile());
 
         File myFile3 = new File("C://Workspace//13.1.1.1//Game//src//main//Utils.java");
-        try {
-            if (myFile3.createNewFile()) {
-                sb.append("Создан файл Utils.java     ");
-            }
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
+        log.append(myFile3 + " успешно создан\n" + myFile3.createNewFile());
 
-        String text = sb.toString();
+        File myFile4 = new File("C://Workspace//13.1.1.1//Game//temp//temp.txt");
+        log.append(myFile4 + " успешно создан\n" + myFile4.createNewFile());
 
-        try (FileWriter writer = new FileWriter("C://Workspace//13.1.1.1//Game//temp//temp.txt")){
+        String text = log.toString();
+        try (FileWriter writer = new FileWriter(myFile4)) {
             writer.write(text);
             writer.flush();
         } catch (IOException ex) {
@@ -86,4 +54,22 @@ public class Main {
         }
 
     }
-}
+
+    private static boolean mkdir(File file) {
+        if (file.mkdir()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private static boolean createNewFile(File file) {
+        try {
+            if (file.createNewFile())
+            return true;
+            }catch(IOException ex){
+                System.out.println(ex.getMessage());
+            }return false;
+        }
+    }
+
